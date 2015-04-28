@@ -3,6 +3,7 @@ var Youtube = function(opts) {
     this.videoID = opts.videoID;
     //this.url = opts.url || {};
     this.player = opts.player || null;
+    this.playstate = false;
 
     this.initialize();
 };
@@ -34,12 +35,15 @@ Youtube.prototype.loadPlayer = function() {
                         videoId: this.videoID,
                         events: {
                             "onReady": this.onPlayerReady,
+                            //"onPlaybackQualityChange": onPlayerPlaybackQualityChange,
                             "onStateChange": this.onPlayerStateChange,
+                            //"onError": onPlayerError,
                         },
                         playerVals: {
                             "rel": 0,
                             "showInfo": 0,
-                            "controls": 0
+                            "controls": 0,
+                            "autoplay": 1,
                         }
         });
     } else {
@@ -50,6 +54,14 @@ Youtube.prototype.loadPlayer = function() {
 // player の準備完了時
 Youtube.prototype.onPlayerReady = function() {
     console.log("onPlayerReady");
+
+    /* pc or smartphone 
+    if(navigator) {
+        // pc action
+    } else {
+        // smartphone action
+    }
+    */
 };
 
 // playerのstatusが変更される度に発生
@@ -80,8 +92,6 @@ Youtube.prototype.onPlayerStateChange = function(event) {
 })();
 
 /*
-    var player;
-    var videoID = "SnXkhkEvNIM";
      function play() {
         console.log("play");
         player.playVideo();
