@@ -1,5 +1,6 @@
 var Youtube = function(opt) {
     var opts = opts || {};
+    console.log(opts);
     this.videoID = opts.videoID;
     //this.url = opts.url || {};
     this.player = opts.player || null;
