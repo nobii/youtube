@@ -3,7 +3,8 @@
     "use strict";
 
     var youtube = new Youtube({
-            videoID: "SnXkhkEvNIM",
+            elem: "player",
+            videoID: "SnXkhkEvNIM"
     });
 
 })(window, document, jQuery);

@@ -1,9 +1,10 @@
 var Youtube = function(opts) {
     opts = opts || {};
     this.videoID = opts.videoID;
+    this.elem = opts.elem;
     //this.url = opts.url || {};
     this.player = opts.player || null;
-    this.playstate = false;
+    this.playstate = "";
 
     this.initialize();
 };
@@ -15,21 +16,14 @@ Youtube.prototype.initialize = function() {
         console.log("onYouTubeIframeAPIReady");
         that.loadPlayer();
     };
+
 };
 
-/*
-Youtube.prototype.initialize = function() {
-    // playerの準備完了時
-        console.log("onYouTubeIframeAPIReady");
-        this.loadPlayer();
-};
-*/
-
-// youtube player をロードする
+/// youtube player をロードする
 Youtube.prototype.loadPlayer = function() {
     console.log("loadPlayer(" + this.videoID + ")");
     if(!this.player) {
-        this.player = new YT.Player('player', {
+        this.player = new YT.Player(this.elem, {
                         width: '640',
                         height: '390',
                         videoId: this.videoID,
@@ -64,20 +58,29 @@ Youtube.prototype.onPlayerReady = function() {
     */
 };
 
+
 // playerのstatusが変更される度に発生
 Youtube.prototype.onPlayerStateChange = function(event) {
     console.log("PlayerState:" + event.data);
     switch(event.data) {
         case YT.PlayerState.ENDED:
+            this.playstate = "end";
+            break;
         case YT.PlayerState.PAUSED:
+            this.playstate = "paused";
+            break;
         case YT.PlayerState.CUED:
+            this.playstate = "cued";
             break;
         case YT.PlayerState.PLAYING:
+            this.playstate = "playing";
+            break;
         case YT.PlayerState.BUFFERING:
-            $("#play").html("一時停止");
+            this.playstate = "buffering";
+            //$("#play").html("一時停止");
             break;
         default:
-            $("#play").html("再生");
+            //$("#play").html("再生");
             break;
     }
 };
