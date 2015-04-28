@@ -39,7 +39,7 @@ Youtube.prototype.loadPlayer = function() {
                             "onStateChange": this.onPlayerStateChange,
                             //"onError": onPlayerError,
                         },
-                        playerVals: {
+                        playerVars: {
                             "rel": 0,
                             "showInfo": 0,
                             "controls": 0,
