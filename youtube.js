@@ -153,12 +153,3 @@ Youtube.prototype.seek = function(seekSeconds) {
     console.log("add iframe script");
 })();
 
-/*
-    $("#stop").click(function() {
-        stop();
-    });
-    $("#seek").click(function() {
-        player.seekTo(30, true);
-        play();
-    });
-*/
