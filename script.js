@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var isPlay = false;
+    var isPlay = true;
 
     $("#playtoggle").on('click', function() {
         if(isPlay) {
