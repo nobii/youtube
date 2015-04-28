@@ -15,7 +15,7 @@ Youtube.prototype.initialize = function() {
     // playerの準備完了時
     window.onYouTubeIframeAPIReady = function() {
         console.log("onYouTubeIframeAPIReady");
-        loadPlayer(this.videoID);
+        this.loadPlayer(this.videoID);
     };
 };
 
