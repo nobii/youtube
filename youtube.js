@@ -67,6 +67,7 @@ Youtube.prototype.onPlayerStateChange = function(event) {
     var script = document.createElement('script');
     script.src = 'https://www.youtube.com/iframe_api';
     document.body.appendChild(script);
+    console.log(script);
 })();
 
 /*
