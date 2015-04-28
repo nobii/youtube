@@ -89,6 +89,34 @@ Youtube.prototype.onPlayerStateChange = function(event) {
     }
 };
 
+Youtube.prototype.getState = function() {
+    /*
+        -1 – 未開始
+        0 – 終了
+        1 – 再生中
+        2 – 一時停止
+        3 – バッファリング中
+        5 – 頭出し済み
+    */
+    var playerState = this.player.getPlayerState();
+    switch(playerState) {
+        case -1:
+            return "";
+        case 0:
+            return false;
+        case 1:
+            return true;
+        case 2:
+            return false;
+        case 3:
+            return false;
+        case 5:
+            return false;
+        default:
+            return "";
+    }
+};
+
 Youtube.prototype.play = function() {
     console.log("play");
     this.player.playVideo();

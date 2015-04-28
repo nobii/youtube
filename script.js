@@ -3,14 +3,15 @@
     "use strict";
 
     var isPlay = true;
+    var playerState;
 
-    $("#playtoggle").on('click', function() {
-        if(isPlay) {
+    $("#playtoggle").on('click', function(e) {
+        e.preventDefault();
+        playerState = youtube.getState();
+        if(playerState) {
             youtube.pause();
-            isPlay = false;
         } else {
             youtube.play();
-            isPlay = true;
         }
     });
 
