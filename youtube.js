@@ -1,4 +1,4 @@
-var Youtube = function(opt) {
+var Youtube = function(opts) {
     opts = opts || {};
     this.videoID = opts.videoID;
     //this.url = opts.url || {};
