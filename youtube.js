@@ -33,7 +33,7 @@ Youtube.prototype.loadPlayer = function() {
                         videoId: this.videoID,
                         playerVars: {
                             "rel": 0,
-                            "showInfo": 0,
+                            "showinfo": 0,
                             "controls": 0,
                             "autoplay": 1,
                             "disablekb": 0,
