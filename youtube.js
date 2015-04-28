@@ -33,18 +33,18 @@ Youtube.prototype.loadPlayer = function() {
                         width: '640',
                         height: '390',
                         videoId: this.videoID,
-                        events: {
-                            "onReady": this.onPlayerReady,
-                            //"onPlaybackQualityChange": onPlayerPlaybackQualityChange,
-                            "onStateChange": this.onPlayerStateChange,
-                            //"onError": onPlayerError,
-                        },
                         playerVars: {
                             "rel": 0,
                             "showInfo": 0,
                             "controls": 0,
                             "autoplay": 1,
-                        }
+                        },
+                        events: {
+                            "onReady": this.onPlayerReady,
+                            //"onPlaybackQualityChange": onPlayerPlaybackQualityChange,
+                            "onStateChange": this.onPlayerStateChange
+                            //"onError": onPlayerError,
+                        },
         });
     } else {
         this.player.loadVideoByID(videoID);
