@@ -6,7 +6,7 @@ var Youtube = function(opt) {
 
     this.initialize();
 };
-
+/*
 Youtube.prototype.initialize = function() {
     // playerの準備完了時
     var that = this;
@@ -15,6 +15,15 @@ Youtube.prototype.initialize = function() {
         that.loadPlayer();
     };
 };
+*/
+
+Youtube.prototype.initialize = function() {
+    // playerの準備完了時
+        console.log("onYouTubeIframeAPIReady");
+        this.loadPlayer();
+};
+
+
 
 // youtube player をロードする
 Youtube.prototype.loadPlayer = function() {
