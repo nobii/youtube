@@ -89,6 +89,29 @@ Youtube.prototype.onPlayerStateChange = function(event) {
     }
 };
 
+Youtube.prototype.play = function() {
+    console.log("play");
+    this.player.playVideo();
+};
+
+Youtube.prototype.pause = function() {
+    console.log("pause");
+    this.player.pauseVideo();
+};
+
+Youtube.prototype.stop = function() {
+    console.log("stop");
+    this.player.stopVideo();
+    this.player.cueVideoById(this.videoID);
+};
+
+Youtube.prototype.seek = function(seekSeconds) {
+    console.log("seek");
+    this.player.seekTo(/* int */seekSeconds, true);
+    this.play();
+};
+
+
 // 無名関数呼び込み
 (function() {
     // youtube読み込み
@@ -99,32 +122,6 @@ Youtube.prototype.onPlayerStateChange = function(event) {
 })();
 
 /*
-     function play() {
-        console.log("play");
-        player.playVideo();
-        $(this).html("再生");
-    }
-    function pause() {
-        console.log("pause");
-        player.pauseVideo();
-        $(this).html("一時停止");
-    }
-    function stop() {
-        console.log("stop");
-        player.stopVideo();
-        player.cueVideoById(videoID);
-        $(this).html("一時停止");
-    }
-
-    $("#play").click(function() {
-        var label = $(this).html();
-        console.log("play");
-        if(label == "再生") {
-            play();
-        } else {
-            pause();
-        }
-    });
     $("#stop").click(function() {
         stop();
     });
@@ -132,4 +129,4 @@ Youtube.prototype.onPlayerStateChange = function(event) {
         player.seekTo(30, true);
         play();
     });
-    */
+*/
