@@ -4,7 +4,7 @@ var Youtube = function(opt) {
     //this.url = opts.url || {};
     this.player = opts.player || null;
 
-    this.initalize();
+    this.initialize();
 };
 
 Youtube.prototype.initialize = function() {
