@@ -37,9 +37,9 @@ Youtube.prototype.loadPlayer = function() {
                             "controls": 0,
                             "autoplay": 1,
                             "disablekb": 0,
-                            "modestbranding": 0,
-                            "cc_load_policy": 0,
-                            "autohide": 0,
+                            //"modestbranding": 0,
+                            //"cc_load_policy": 0,
+                            //"autohide": 0,
                         },
                         events: {
                             "onReady": this.onPlayerReady,
