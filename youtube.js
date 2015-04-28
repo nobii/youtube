@@ -51,6 +51,7 @@ Youtube.prototype.onPlayerStateChange = function(event) {
             $("#play").html("再生");
             break;
     }
+};
     
 Youtube.prototype.initialize = function() {
     // playerの準備完了時
@@ -60,8 +61,6 @@ Youtube.prototype.initialize = function() {
     };
 };
 
-
-};
 
 // 無名関数呼び込み
 (function() {
