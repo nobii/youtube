@@ -4,7 +4,8 @@
 
     var youtube = new Youtube({
             elem: "player",
-            videoID: "SnXkhkEvNIM"
+            videoID: "SnXkhkEvNIM",
+            width: '640'
     });
 
 })(window, document, jQuery);

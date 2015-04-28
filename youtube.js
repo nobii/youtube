@@ -6,6 +6,10 @@ var Youtube = function(opts) {
     this.player = opts.player || null;
     this.playstate = "";
 
+    this.width = opts.width || '640';
+    this.movieRate = 9 / 16;
+    this.height = this.width * this.movieRate;
+
     this.initialize();
 };
 
@@ -24,8 +28,8 @@ Youtube.prototype.loadPlayer = function() {
     console.log("loadPlayer(" + this.videoID + ")");
     if(!this.player) {
         this.player = new YT.Player(this.elem, {
-                        width: '640',
-                        height: '390',
+                        width: this.width,
+                        height: this.height,
                         videoId: this.videoID,
                         playerVars: {
                             "rel": 0,
