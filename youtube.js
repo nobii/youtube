@@ -7,6 +7,15 @@ var Youtube = function(opt) {
     this.initialize();
 };
 
+Youtube.prototype.initialize = function() {
+    // playerの準備完了時
+    var that = this;
+    window.onYouTubeIframeAPIReady = function() {
+        console.log("onYouTubeIframeAPIReady");
+        that.loadPlayer();
+    };
+};
+
 // youtube player をロードする
 Youtube.prototype.loadPlayer = function() {
     console.log("loadPlayer(" + this.videoID + ")");
@@ -52,15 +61,6 @@ Youtube.prototype.onPlayerStateChange = function(event) {
             break;
     }
 };
-    
-Youtube.prototype.initialize = function() {
-    // playerの準備完了時
-    window.onYouTubeIframeAPIReady = function() {
-        console.log("onYouTubeIframeAPIReady");
-        this.loadPlayer();
-    };
-};
-
 
 // 無名関数呼び込み
 (function() {
