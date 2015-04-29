@@ -1,12 +1,25 @@
 <head>
+    <style>
+        div#wrapper {
+            width: 980px;
+            text-align: center;
+            position: relative;
+        }
+        div#player, div#player-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 <body>
-    <div id="player"></div>
-    <a id="playtoggle" href="#">再生/停止</a>
-    <a id="seek" href="#">3:50から再生</a>
-    <!--<a id="stop" href="#">停止</a>-->
-    <!--<a id="seek" href="#">00:30から再生</a>-->
+    <div id="wrapper">
+        <div id="player"></div>
+        <div id="player-cover"></div>
+        <a id="playtoggle" href="#">再生/停止</a>
+        <a id="seek" href="#">3:50から再生</a>
+    </div>
     <script type="text/javascript" src="./youtube.js"></script>
     <script type="text/javascript" src="./script.js"></script>
 </body>

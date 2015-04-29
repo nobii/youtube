@@ -1,14 +1,23 @@
 var Youtube = function(opts) {
+
     opts = opts || {};
+
     this.videoID = opts.videoID;
     this.elem = opts.elem;
     //this.url = opts.url || {};
     this.player = opts.player || null;
     this.playstate = "";
-
     this.width = opts.width || '640';
     this.movieRate = 9 / 16;
     this.height = this.width * this.movieRate;
+
+    // 引数が足りない時のエラー処理
+    if(!this.videoID) {
+        throw new Error("please set videoID");
+    }
+    if(!this.elem) {
+        throw new Error("please set elementID");
+    }
 
     this.initialize();
 };
@@ -22,6 +31,8 @@ Youtube.prototype.initialize = function() {
     };
 
 };
+
+Youtube = EventTrigger.extend(Youtube);
 
 /// youtube player をロードする
 Youtube.prototype.loadPlayer = function() {
@@ -137,9 +148,9 @@ Youtube.prototype.stop = function() {
     this.player.cueVideoById(this.videoID);
 };
 
-Youtube.prototype.seek = function(seekSeconds) {
+Youtube.prototype.seek = function(/* int */seekSeconds) {
     console.log("seek");
-    this.player.seekTo(/* int */seekSeconds, true);
+    this.player.seekTo(seekSeconds, true);
     this.play();
 };
 
