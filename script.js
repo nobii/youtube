@@ -26,7 +26,7 @@
         }
     });
 
-    $("#playtoggle").on('click', function(e) {
+    $("#seek").on('click', function(e) {
         e.preventDefault();
         youtube.seek(230);
     });
