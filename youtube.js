@@ -32,7 +32,7 @@ Youtube.prototype.initialize = function() {
 
 };
 
-//Youtube = EventTrigger.extend(Youtube);
+Youtube = EventTrigger.extend(Youtube);
 
 /// youtube player をロードする
 Youtube.prototype.loadPlayer = function() {
