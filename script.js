@@ -8,6 +8,12 @@
     var elemID = "player";
     var setWid = "640";
 
+    var youtube = new Youtube({
+            elem: elemID,
+            videoID: "SnXkhkEvNIM",
+            width: setWid 
+    });
+
     $("#playtoggle").on('click', function(e) {
         e.preventDefault();
         playerState = youtube.getState();
@@ -41,14 +47,7 @@
         youtube.seek(230);
     });
 
-
-    var youtube = new Youtube({
-            elem: elemID,
-            videoID: "SnXkhkEvNIM",
-            width: setWid 
-    });
-
-    $("#player-cover").width(setWidth).height(setWidth*9/16);
+    $("#player-cover").width(setWid).height(setWid*9/16);
 
 })(window, document, jQuery);
 
