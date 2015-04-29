@@ -48,7 +48,7 @@
             width: setWid 
     });
 
-    $("#player-cover").width(width).height(width*9/16);
+    $("#player-cover").width(setWidth).height(setWidth*9/16);
 
 })(window, document, jQuery);
 
