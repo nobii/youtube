@@ -3,10 +3,12 @@
         div#wrapper {
             width: 980px;
             text-align: center;
-            position: relative;
             margin: 0 auto;
         }
-        div#player, div#player-cover {
+        div#player-wrapper {
+            position: relative;
+        }
+        div#player, div#player-cover, iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -16,10 +18,12 @@
 </head>
 <body>
     <div id="wrapper">
-        <div id="player"></div>
-        <div id="player-cover"></div>
-        <a id="playtoggle" href="#">再生/停止</a>
-        <a id="seek" href="#">3:50から再生</a>
+        <div id="player-wrapper">
+            <div id="player"></div>
+            <div id="player-cover"></div>
+        </div>
+        <p><a id="playtoggle" href="#">再生/停止</a></p>
+        <p><a id="seek" href="#">3:50から再生</a></p>
     </div>
     <script type="text/javascript" src="./youtube.js"></script>
     <script type="text/javascript" src="./script.js"></script>
