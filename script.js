@@ -18,9 +18,9 @@
         e.preventDefault();
         playerState = youtube.getState();
         if(playerState) {
-            player.stop();
+            youtube.stop();
         } else {
-            player.start();
+            youtube.start();
         }
         /*
         switch(playerState) {
