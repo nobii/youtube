@@ -49,5 +49,6 @@
 
     $("#player-wrapper, #player-cover").width(setWid).height(setWid*9/16);
 
+
 })(window, document, jQuery);
 
