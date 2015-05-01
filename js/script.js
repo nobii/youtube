@@ -7,7 +7,7 @@ $(function(){
 
     var elemID = "player";
     var $youtube = $(elemID);
-    var setWid = "640";
+    var setWid = "960";
 
     var youtube = new Youtube({
             elem: elemID,
@@ -19,9 +19,9 @@ $(function(){
 
     youtube.on('ready', function() {
         console.log("script.js:ready");
-        youtube.onPlayerReady();
-        youtube.play();
-        youtube.mute();
+        this.onPlayerReady();
+        this.play();
+        this.mute();
 
         /* pc or smartphone
         if(navigator) {
@@ -37,8 +37,10 @@ $(function(){
     });
 
     youtube.on('ended', function() {
-        alert("script.js:ended youtube!");
-        console.log('scropt.js:alert');
+        //alert("script.js:ended youtube!");
+        console.log('script.js:alert');
+        this.stop();
+        //$("#wrapper").fadeOut(2000);
     });
 
     youtube.on('seek', function() {
