@@ -137,6 +137,7 @@
             3 – バッファリング中
             5 – 頭出し済み
         */
+        // returnの値は要修正
         var playerState = this.player.getPlayerState();
         switch(playerState) {
             case -1:
@@ -157,7 +158,7 @@
     };
 
     (function() {
-        // youtube読み込み
+        // youtube api 読み込み
         var script = document.createElement('script');
         script.src = 'https://www.youtube.com/iframe_api';
         document.body.appendChild(script);

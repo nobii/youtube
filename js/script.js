@@ -30,14 +30,15 @@ $(function(){
         youtube.play();
         youtube.mute();
     });
+
     youtube.on('playing', function() {
         console.log("script.js:playing");
     });
 
     youtube.on('ended', function() {
-        youtube.stop();
+        //youtube.stop();
+        alert('ended.');
         console.log('script.js:ended');
-        youtube.stop();
     });
 
     youtube.on('seek', function() {
