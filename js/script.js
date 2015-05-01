@@ -7,6 +7,8 @@ $(function(){
 
     var elemID = "player";
     var $youtube = $(elemID);
+    // setWidという名前が適切で無い
+    // ここ文字列にしとくと、あとで悲劇が起きそう
     var setWid = "960";
 
     var youtube = new Youtube({
@@ -18,8 +20,10 @@ $(function(){
     });
 
     youtube.on('ready', function() {
+        // console.log出していく姿勢はよいけれど、IE9で憤死したりするので直前は注意
         console.log("script.js:ready");
         youtube.onPlayerReady();
+        // agentというかisSPですね コメントで書くくらいなら変数名にしちゃうとよい
         var agent = navigator.userAgent.match(/(iPhone|iPod|iPad|Android)/i);
         console.log(agent);
 
@@ -46,6 +50,8 @@ $(function(){
         console.log('script.js:seek');
     });
 
+    // シングルクォートとダブルクォートが混ざってるの気持ち悪い気がする
+    // どちらかに統一すればいいとおもいます
     $("#playtoggle").on('click', function(e) {
         e.preventDefault();
         var playerState = youtube.getState();
@@ -63,6 +69,8 @@ $(function(){
         youtube.seek(80);
     });
 
+    // 9/16は、Youtubeクラスがプロパティ持ってるので、そっちつかってもよさそう
+    // あと、ちゃんと中身見てないけど、#player-wrapper, #player-cover両方サイズつけないとだめなんだっけ？
     $("#player-wrapper, #player-cover").width(setWid).height(setWid*9/16);
 
 });

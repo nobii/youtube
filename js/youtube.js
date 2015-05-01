@@ -9,12 +9,15 @@
         this.elemID = opts.elem;
         this.$dom = $("#" + this.elemID);
         this.player = opts.player || null;
+        // ↓つかってない
         this.playstate = "";
         this.width = opts.width || '640';
         this.movieRate = 9 / 16;
         this.height = this.width * this.movieRate;
 
+        // ↓これ意味あるか…？
         this.instance = this;
+        // ↓つかってない
         this.playerInstance = {};
 
         // 引数が足りない時のエラー処理
@@ -31,6 +34,8 @@
     // playerの準備開始
     Youtube.prototype.initialize = function() {
         var instance = this;
+        // youtube iframe apiが読み込まれるより、確実に先に定義しておきたい
+        // iframe api読み込むのをクラスメソッド化するのがいいかも
         window.onYouTubeIframeAPIReady = function() {
             console.log("youtube.js:onYouTubeIframeAPIReady");
             instance.loadPlayer();
@@ -45,6 +50,7 @@
         var instance = this;
         console.log(instance);
         if(!this.player) {
+            // ここのインデント浅くしときましょう
             this.player = new YT.Player(this.elemID, {
                             width: this.width,
                             height: this.height,
@@ -94,6 +100,7 @@
         this.player.pauseVideo();
     };
 
+    // 何もやってないメソッドはけしましょう
     Youtube.prototype.stop = function() {
         console.log("youtube.js:stop");
         //this.player.stopVideo();
@@ -108,6 +115,7 @@
         //this.player.cueVideoById(this.videoID);
     };
 
+    // 何もやってないメソッドはけしましょう
     Youtube.prototype.playing = function() {
         console.log("youtube.js:playing");
     };
