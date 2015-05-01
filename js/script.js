@@ -22,11 +22,12 @@ $(function(){
         youtube.onPlayerReady();
         var agent = navigator.userAgent.match(/(iPhone|iPod|iPad|Android)/i);
         console.log(agent);
-        // pc or smartphone
+
+        // is smartphone
         if(agent) {
-            // smartphone action
             return;
         }
+
         youtube.play();
         youtube.mute();
     });
