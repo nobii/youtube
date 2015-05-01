@@ -70,7 +70,7 @@ Youtube.prototype.loadPlayer = function() {
                                 instance.trigger('ready', e);
                             },
                             "onStateChange": function(e) {
-                                instance.trigger('stateChange', e);
+                                //instance.trigger('stateChange', e);
                                 switch (e.data) {
 
                                     // trigger で発火するversion
@@ -79,7 +79,7 @@ Youtube.prototype.loadPlayer = function() {
                                     case YT.PlayerState.ENDED:
                                         // trigger で発火させると 最後にチラつくからここで直接処理
                                         e.target.stopVideo();
-                                        e.target.clearVideo();
+                                        //e.target.clearVideo();
                                         console.log("player stop when case switch.");
                                         break;
 
