@@ -113,7 +113,7 @@ Youtube.prototype.pause = function() {
 Youtube.prototype.stop = function() {
     console.log("youtube.js:stop");
     this.player.stopVideo();
-    this.player.clearVideo();
+    //this.player.clearVideo();
 
     // 動画を最初のキューまで戻す
     //this.player.cueVideoById(this.videoID);
