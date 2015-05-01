@@ -86,7 +86,7 @@ $(function(){
 
     $("#seek").on('click', function(e) {
         e.preventDefault();
-        youtube.seek(230);
+        youtube.seek(440);
         //youtube.pause();
     });
 
