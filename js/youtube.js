@@ -1,9 +1,12 @@
+//(function(exports) {
+
 var Youtube = function(opts) {
 
     opts = opts || {};
 
     this.videoID = opts.videoID;
-    this.elem = opts.elem;
+    this.elemID = opts.elem;
+    this.$dom = $("#" + this.elemID);
     //this.url = opts.url || {};
     this.player = opts.player || null;
     this.playstate = "";
@@ -11,11 +14,14 @@ var Youtube = function(opts) {
     this.movieRate = 9 / 16;
     this.height = this.width * this.movieRate;
 
+    this.instance = this;
+    this.playerInstance = {};
+
     // 引数が足りない時のエラー処理
     if(!this.videoID) {
         throw new Error("please set videoID");
     }
-    if(!this.elem) {
+    if(!this.elemID) {
         throw new Error("please set elementID");
     }
 
@@ -24,10 +30,12 @@ var Youtube = function(opts) {
 
 Youtube.prototype.initialize = function() {
     // playerの準備完了時
-    var that = this;
+    var instance = this;
+    var $dom = this.$dom;
+
     window.onYouTubeIframeAPIReady = function() {
         console.log("onYouTubeIframeAPIReady");
-        that.loadPlayer();
+        instance.loadPlayer();
     };
 
 };
@@ -37,8 +45,11 @@ Youtube = EventTrigger.extend(Youtube);
 /// youtube player をロードする
 Youtube.prototype.loadPlayer = function() {
     console.log("loadPlayer(" + this.videoID + ")");
+    var instance = this;
+    this.playerInstance = instance;
+    console.log(this.playerInstance);
     if(!this.player) {
-        this.player = new YT.Player(this.elem, {
+        this.player = new YT.Player(this.elemID, {
                         width: this.width,
                         height: this.height,
                         videoId: this.videoID,
@@ -53,12 +64,22 @@ Youtube.prototype.loadPlayer = function() {
                             //"autohide": 0,
                         },
                         events: {
-                            "onReady": this.onPlayerReady,
-                            //"onPlaybackQualityChange": onPlayerPlaybackQualityChange,
-                            "onStateChange": this.onPlayerStateChange
-                            //"onError": onPlayerError,
+                            "onReady": function(e) {
+                                instance.trigger('ready', e);
+                            },
+                            "onStateChange": function(e) {
+                                instance.trigger('stateChange', e);
+                                switch (e.data) {
+                                    case YT.PlayerState.ENDED: instance.trigger('ended', e); break;
+                                    case YT.PlayerState.PLAYING: instance.trigger('playing', e); break;
+                                    case YT.PlayerState.PAUSED: instance.trigger('paused', e); break;
+                                    case YT.PlayerState.BUFFERING: instance.trigger('buffering', e); break;
+                                    case YT.PlayerState.CUED: instance.trigger('cued', e); break;
+                                }
+                            }
                         },
         });
+
     } else {
         this.player.loadVideoByID(videoID);
     }
@@ -77,31 +98,67 @@ Youtube.prototype.onPlayerReady = function() {
     */
 };
 
+Youtube.prototype.play = function() {
+    console.log("play");
+    this.player.playVideo();
+};
+
+Youtube.prototype.pause = function() {
+    console.log("pause");
+    this.player.pauseVideo();
+};
+
+Youtube.prototype.stop = function() {
+    console.log("stop");
+    this.player.stopVideo();
+    this.player.cueVideoById(this.videoID);
+};
+
+Youtube.prototype.playing = function() {
+    console.log("playing");
+};
+
+Youtube.prototype.mute = function() {
+    console.log("mute");
+    this.player.mute();
+};
+
+
+Youtube.prototype.seek = function(/* int */seekSeconds) {
+    console.log("seek");
+    this.player.seekTo(seekSeconds, true);
+    this.play();
+};
 
 // playerのstatusが変更される度に発生
 Youtube.prototype.onPlayerStateChange = function(event) {
     console.log("PlayerState:" + event.data);
+
+    /*
+    var $dom = this.$dom;
+    var i = this;
+    var instance = i.playerInstance;
+    console.log(instance);
     switch(event.data) {
         case YT.PlayerState.ENDED:
-            this.playstate = "end";
+            instance.trigger("ended");
             break;
         case YT.PlayerState.PAUSED:
-            this.playstate = "paused";
+            instance.trigger("paused");
             break;
         case YT.PlayerState.CUED:
-            this.playstate = "cued";
+            instance.trigger("cue");
             break;
         case YT.PlayerState.PLAYING:
-            this.playstate = "playing";
+            instance.trigger("playing");
             break;
         case YT.PlayerState.BUFFERING:
-            this.playstate = "buffering";
-            //$("#play").html("一時停止");
+            instance.trigger("buffering");
             break;
         default:
-            //$("#play").html("再生");
             break;
     }
+    */
 };
 
 Youtube.prototype.getState = function() {
@@ -132,29 +189,6 @@ Youtube.prototype.getState = function() {
     }
 };
 
-Youtube.prototype.play = function() {
-    console.log("play");
-    this.player.playVideo();
-};
-
-Youtube.prototype.pause = function() {
-    console.log("pause");
-    this.player.pauseVideo();
-};
-
-Youtube.prototype.stop = function() {
-    console.log("stop");
-    this.player.stopVideo();
-    this.player.cueVideoById(this.videoID);
-};
-
-Youtube.prototype.seek = function(/* int */seekSeconds) {
-    console.log("seek");
-    this.player.seekTo(seekSeconds, true);
-    this.play();
-};
-
-
 // 無名関数呼び込み
 (function() {
     // youtube読み込み
@@ -164,3 +198,6 @@ Youtube.prototype.seek = function(/* int */seekSeconds) {
     console.log("add iframe script");
 })();
 
+//exports.Youtube = Youtube;
+
+//})(this);

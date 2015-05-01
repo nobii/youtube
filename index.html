@@ -7,14 +7,16 @@
         }
         div#player-wrapper {
             position: relative;
+            margin: 0 auto;
         }
-        div#player, div#player-cover, iframe {
+        div#player-cover {
             position: absolute;
             top: 0;
             left: 0;
         }
     </style>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/EventTrigger.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -25,7 +27,7 @@
         <p><a id="playtoggle" href="#">再生/停止</a></p>
         <p><a id="seek" href="#">3:50から再生</a></p>
     </div>
-    <script type="text/javascript" src="./youtube.js"></script>
-    <script type="text/javascript" src="./script.js"></script>
+    <script type="text/javascript" src="./js/youtube.js"></script>
+    <script type="text/javascript" src="./js/script.js"></script>
 </body>
 </html>
