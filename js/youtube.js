@@ -54,6 +54,7 @@ Youtube.prototype.loadPlayer = function() {
                         width: this.width,
                         height: this.height,
                         videoId: this.videoID,
+                        endSeconds: 260,
                         playerVars: {
                             "rel": 0,
                             "showinfo": 0,
@@ -71,7 +72,17 @@ Youtube.prototype.loadPlayer = function() {
                             "onStateChange": function(e) {
                                 instance.trigger('stateChange', e);
                                 switch (e.data) {
-                                    case YT.PlayerState.ENDED: instance.trigger('ended', e); break;
+
+                                    // trigger で発火するversion
+                                    //case YT.PlayerState.ENDED: instance.trigger('ended', e); break;
+
+                                    case YT.PlayerState.ENDED:
+                                        // trigger で発火させると 最後にチラつくからここで直接処理
+                                        e.target.stopVideo();
+                                        e.target.clearVideo();
+                                        console.log("player stop when case switch.");
+                                        break;
+
                                     case YT.PlayerState.PLAYING: instance.trigger('playing', e); break;
                                     case YT.PlayerState.PAUSED: instance.trigger('paused', e); break;
                                     case YT.PlayerState.BUFFERING: instance.trigger('buffering', e); break;
@@ -111,9 +122,9 @@ Youtube.prototype.pause = function() {
 };
 
 Youtube.prototype.stop = function() {
-    console.log("youtube.js:stop");
+    //console.log("youtube.js:stop");
     this.player.stopVideo();
-    //this.player.clearVideo();
+    this.player.clearVideo();
 
     // 動画を最初のキューまで戻す
     //this.player.cueVideoById(this.videoID);
