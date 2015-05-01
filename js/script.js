@@ -11,9 +11,9 @@ $(function(){
 
     var youtube = new Youtube({
             elem: elemID,
-            //videoID: "5Lzw7YsmbcE",
+            videoID: "5Lzw7YsmbcE",
             //videoID: "jfBmSXFPMWo",
-            videoID: "SnXkhkEvNIM",
+            //videoID: "SnXkhkEvNIM",
             width: setWid 
     });
 
@@ -60,7 +60,7 @@ $(function(){
 
     $("#seek").on('click', function(e) {
         e.preventDefault();
-        youtube.seek(255);
+        youtube.seek(80);
     });
 
     $("#player-wrapper, #player-cover").width(setWid).height(setWid*9/16);
