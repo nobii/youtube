@@ -19,6 +19,7 @@ $(function(){
 
     youtube.on('ready', function() {
         console.log("script.js:ready");
+        youtube.onPlayerReady();
         youtube.play();
         youtube.mute();
 
@@ -29,31 +30,19 @@ $(function(){
             // smartphone action
         }
         */
-    });
 
-   /* 
-    $youtube.on('stop', function() {
-        console.log("script.js:stop");
-        //youtube.stop();
     });
-
-    $youtube.on('playing', function() {
-        console.log("script.js:playing");
-        //youtube.stop();
-    });
-    */
-
     youtube.on('playing', function() {
         console.log("script.js:playing");
     });
 
     youtube.on('ended', function() {
-        alert("ended youtube!");
-        console.log('alert');
+        alert("script.js:ended youtube!");
+        console.log('scropt.js:alert');
     });
 
     youtube.on('seek', function() {
-        console.log('seek');
+        console.log('script.js:seek');
     });
 
     $("#playtoggle").on('click', function(e) {
@@ -86,7 +75,7 @@ $(function(){
 
     $("#seek").on('click', function(e) {
         e.preventDefault();
-        youtube.seek(440);
+        youtube.seek(445);
         //youtube.pause();
     });
 

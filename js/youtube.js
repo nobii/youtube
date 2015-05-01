@@ -1,5 +1,9 @@
 //(function(exports) {
 
+// window, document などを明示的に定義
+(function($, window, document, undefined){
+
+ 
 var Youtube = function(opts) {
 
     opts = opts || {};
@@ -28,13 +32,11 @@ var Youtube = function(opts) {
     this.initialize();
 };
 
+// playerの準備完了時
 Youtube.prototype.initialize = function() {
-    // playerの準備完了時
     var instance = this;
-    var $dom = this.$dom;
-
     window.onYouTubeIframeAPIReady = function() {
-        console.log("onYouTubeIframeAPIReady");
+        console.log("youtube.js:onYouTubeIframeAPIReady");
         instance.loadPlayer();
     };
 
@@ -44,10 +46,9 @@ Youtube = EventTrigger.extend(Youtube);
 
 /// youtube player をロードする
 Youtube.prototype.loadPlayer = function() {
-    console.log("loadPlayer(" + this.videoID + ")");
+    console.log("youtube.js:loadPlayer(" + this.videoID + ")");
     var instance = this;
-    this.playerInstance = instance;
-    console.log(this.playerInstance);
+    console.log(instance);
     if(!this.player) {
         this.player = new YT.Player(this.elemID, {
                         width: this.width,
@@ -82,12 +83,13 @@ Youtube.prototype.loadPlayer = function() {
 
     } else {
         this.player.loadVideoByID(videoID);
+        //this.player.loadPlayer(videoID);
     }
 };
 
 // player の準備完了時
 Youtube.prototype.onPlayerReady = function() {
-    console.log("onPlayerReady");
+    console.log("youtube.js:onPlayerReady");
 
     /* pc or smartphone 
     if(navigator) {
@@ -99,40 +101,40 @@ Youtube.prototype.onPlayerReady = function() {
 };
 
 Youtube.prototype.play = function() {
-    console.log("play");
+    console.log("youtube.js:play");
     this.player.playVideo();
 };
 
 Youtube.prototype.pause = function() {
-    console.log("pause");
+    console.log("youtube.js:pause");
     this.player.pauseVideo();
 };
 
 Youtube.prototype.stop = function() {
-    console.log("stop");
+    console.log("youtube.js:stop");
     this.player.stopVideo();
     this.player.cueVideoById(this.videoID);
 };
 
 Youtube.prototype.playing = function() {
-    console.log("playing");
+    console.log("youtube.js:playing");
 };
 
 Youtube.prototype.mute = function() {
-    console.log("mute");
+    console.log("youtube.js:mute");
     this.player.mute();
 };
 
 
 Youtube.prototype.seek = function(/* int */seekSeconds) {
-    console.log("seek");
+    console.log("youtube.js:seek");
     this.player.seekTo(seekSeconds, true);
     this.play();
 };
 
 // playerのstatusが変更される度に発生
 Youtube.prototype.onPlayerStateChange = function(event) {
-    console.log("PlayerState:" + event.data);
+    console.log("youtube.js:PlayerState:" + event.data);
 
     /*
     var $dom = this.$dom;
@@ -195,9 +197,11 @@ Youtube.prototype.getState = function() {
     var script = document.createElement('script');
     script.src = 'https://www.youtube.com/iframe_api';
     document.body.appendChild(script);
-    console.log("add iframe script");
+    console.log("youtube.js:add iframe script");
 })();
 
 //exports.Youtube = Youtube;
-
 //})(this);
+
+window.Youtube = Youtube;
+})(jQuery, this, this.document);
