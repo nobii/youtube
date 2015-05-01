@@ -74,14 +74,17 @@ Youtube.prototype.loadPlayer = function() {
                                 switch (e.data) {
 
                                     // trigger で発火するversion
-                                    //case YT.PlayerState.ENDED: instance.trigger('ended', e); break;
+                                    case YT.PlayerState.ENDED: instance.trigger('ended', e); break;
 
-                                    case YT.PlayerState.ENDED:
+                                    //case YT.PlayerState.ENDED:
                                         // trigger で発火させると 最後にチラつくからここで直接処理
-                                        e.target.stopVideo();
+                                        //e.target.pauseVideo();
+                                        //e.target.loadVideoById('', 0);
+                                        //e.target.seekTo(0);
+                                        //e.target.stopVideo();
                                         //e.target.clearVideo();
-                                        console.log("player stop when case switch.");
-                                        break;
+                                        //console.log("player stop when case switch.");
+                                        //break;
 
                                     case YT.PlayerState.PLAYING: instance.trigger('playing', e); break;
                                     case YT.PlayerState.PAUSED: instance.trigger('paused', e); break;
@@ -93,7 +96,7 @@ Youtube.prototype.loadPlayer = function() {
         });
 
     } else {
-        this.player.loadVideoByID(videoID);
+        this.player.loadVideoById(videoID);
         //this.player.loadPlayer(videoID);
     }
 };
@@ -122,9 +125,14 @@ Youtube.prototype.pause = function() {
 };
 
 Youtube.prototype.stop = function() {
-    //console.log("youtube.js:stop");
-    this.player.stopVideo();
-    this.player.clearVideo();
+    console.log("youtube.js:stop");
+    //this.player.stopVideo();
+    //this.player.clearVideo();
+
+    //e.target.pauseVideo();
+    //this.player.loadVideoById('', 0);
+    //this.player.seekTo(0);
+    //e.target.clearVideo();
 
     // 動画を最初のキューまで戻す
     //this.player.cueVideoById(this.videoID);
@@ -205,7 +213,7 @@ Youtube.prototype.getState = function() {
     }
 };
 
-// 無名関数呼び込み
+
 (function() {
     // youtube読み込み
     var script = document.createElement('script');
@@ -213,6 +221,7 @@ Youtube.prototype.getState = function() {
     document.body.appendChild(script);
     console.log("youtube.js:add iframe script");
 })();
+
 
 //exports.Youtube = Youtube;
 //})(this);

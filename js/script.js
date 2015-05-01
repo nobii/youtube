@@ -19,29 +19,25 @@ $(function(){
 
     youtube.on('ready', function() {
         console.log("script.js:ready");
-        this.onPlayerReady();
-        this.play();
-        this.mute();
-
-        /* pc or smartphone
-        if(navigator) {
-            // pc action
-        } else {
+        youtube.onPlayerReady();
+        var agent = navigator.userAgent.match(/(iPhone|iPod|iPad|Android)/i);
+        console.log(agent);
+        // pc or smartphone
+        if(agent) {
             // smartphone action
+            return;
         }
-        */
-
+        youtube.play();
+        youtube.mute();
     });
     youtube.on('playing', function() {
         console.log("script.js:playing");
     });
 
     youtube.on('ended', function() {
-        $('#player-cover').css('background-color', 'black');
-        $('iframe').css('display', 'none');
-        //alert("script.js:ended youtube!");
-        console.log('script.js:alert');
-        this.stop();
+        youtube.stop();
+        console.log('script.js:ended');
+        youtube.stop();
     });
 
     youtube.on('seek', function() {
@@ -58,13 +54,11 @@ $(function(){
             youtube.play();
             console.log("script.js:play");
         }
-
     });
 
     $("#seek").on('click', function(e) {
         e.preventDefault();
         youtube.seek(255);
-        //youtube.pause();
     });
 
     $("#player-wrapper, #player-cover").width(setWid).height(setWid*9/16);
